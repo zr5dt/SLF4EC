@@ -4,7 +4,7 @@
  * Full interface for SLF4EC
  *
  * @author Jérémie Faucher-Goulet
- * 
+ *
  * @copyright Trilliant Inc. © 2015 - http://www.trilliantinc.com
  *
  * @License
@@ -106,12 +106,14 @@ IS_EXTRA_(                                                                      
  */
 LogResult nfLog0(const LogCategory* category, const uint8_t level, const char* msg);
 LogResult nfLog1(const LogCategory* category, const uint8_t level, const char* formatStr, ...);
+LogResult nfLogv(const LogCategory* category, const uint8_t level, const char* formatStr, va_list vaList);
 #else
 /**
  * Private function called by macros to log with location information.
  */
 LogResult yfLog0(const char* file, const uint32_t line, const char* function, const LogCategory* category, const uint8_t level, const char* msg);
 LogResult yfLog1(const char* file, const uint32_t line, const char* function, const LogCategory* category, const uint8_t level, const char* formatStr, ...);
+LogResult yfLogv(const char* file, const uint32_t line, const char* function, const LogCategory* category, const uint8_t level, const char* formatStr, va_list vaList);
 #endif
 
 /**
@@ -217,11 +219,15 @@ LogResult noLog();
     yfLog0(__FILE__, __LINE__, FUNCTION, &logCategory, level, __VA_ARGS__)
 #define _log1(logCategory, level, ...) \
     yfLog1(__FILE__, __LINE__, FUNCTION, &logCategory, level, __VA_ARGS__)
+#define _logv(logCategory, level, fmt, vaList) \
+    yfLogv(__FILE__, __LINE__, FUNCTION, &logCategory, level, fmt, vaList)
 #else
 #define _log0(logCategory, level, ...) \
     nfLog0(&logCategory, level, __VA_ARGS__)
 #define _log1(logCategory, level, ...) \
     nfLog1(&logCategory, level, __VA_ARGS__)
+#define _logv(logCategory, level, fmt, vaList) \
+    nfLogv(&logCategory, level, fmt, vaList)
 #endif
 
 #ifdef __cplusplus
