@@ -130,17 +130,23 @@ LogResult noLog();
     noLog()
 #define _logOff1(logCategory, ...) \
     noLog()
+#define _vlogOff(logCategory, ...) \
+    noLog()
 
 #if COMPILED_LOG_LEVEL >= LEVEL_FATAL
 #define _logFatal0(logCategory, ...) \
     _log0(logCategory, LEVEL_FATAL, __VA_ARGS__)
 #define _logFatal1(logCategory, ...) \
     _log1(logCategory, LEVEL_FATAL, __VA_ARGS__)
+#define _vlogFatal(logCategory, fmt, valist) \
+    _logv(logCategory, LEVEL_FATAL, fmt, valist)
 #else
 #define _logFatal0(logCategory, ...) \
     noLog()
 #define _logFatal1(logCategory, ...) \
     noLog()
+#define _vlogFatal(logCategory, fmt, valist) \
+    nolog()
 #endif
 
 #if COMPILED_LOG_LEVEL >= LEVEL_ERROR
@@ -148,11 +154,15 @@ LogResult noLog();
     _log0(logCategory, LEVEL_ERROR, __VA_ARGS__)
 #define _logError1(logCategory, ...) \
     _log1(logCategory, LEVEL_ERROR, __VA_ARGS__)
+#define _vlogError(logCategory, fmt, valist) \
+    _logv(logCategory, LEVEL_ERROR, fmt, valist)
 #else
 #define _logError0(logCategory, ...) \
     noLog()
 #define _logError1(logCategory, ...) \
     noLog()
+#define _vlogError(logCategory, fmt, valist) \
+    nolog()
 #endif
 
 #if COMPILED_LOG_LEVEL >= LEVEL_WARN
@@ -160,11 +170,15 @@ LogResult noLog();
     _log0(logCategory, LEVEL_WARN, __VA_ARGS__)
 #define _logWarn1(logCategory, ...) \
     _log1(logCategory, LEVEL_WARN, __VA_ARGS__)
+#define _vlogWarn(logCategory, fmt, valist) \
+    _logv(logCategory, LEVEL_WARN, fmt, valist)
 #else
 #define _logWarn0(logCategory, ...) \
     noLog()
 #define _logWarn1(logCategory, ...) \
     noLog()
+#define _vlogWarn(logCategory, fmt, valist) \
+    nolog()
 #endif
 
 #if COMPILED_LOG_LEVEL >= LEVEL_INFO
@@ -172,11 +186,15 @@ LogResult noLog();
     _log0(logCategory, LEVEL_INFO, __VA_ARGS__)
 #define _logInfo1(logCategory, ...) \
     _log1(logCategory, LEVEL_INFO, __VA_ARGS__)
+#define _vlogInfo(logCategory, fmt, valist) \
+    _logv(logCategory, LEVEL_INFO, fmt, valist)
 #else
 #define _logInfo0(logCategory, ...) \
     noLog()
 #define _logInfo1(logCategory, ...) \
     noLog()
+#define _vlogInfo(logCategory, fmt, valist) \
+    nolog()
 #endif
 
 #if COMPILED_LOG_LEVEL >= LEVEL_DEBUG
@@ -184,11 +202,15 @@ LogResult noLog();
     _log0(logCategory, LEVEL_DEBUG, __VA_ARGS__)
 #define _logDebug1(logCategory, ...) \
     _log1(logCategory, LEVEL_DEBUG, __VA_ARGS__)
+#define _vlogDebug(logCategory, fmt, valist) \
+    _logv(logCategory, LEVEL_DEBUG, fmt, valist)
 #else
 #define _logDebug0(logCategory, ...) \
     noLog()
 #define _logDebug1(logCategory, ...) \
     noLog()
+#define _vlogDebug(logCategory, fmt, valist) \
+    nolog()
 #endif
 
 #if COMPILED_LOG_LEVEL >= LEVEL_TRACE
@@ -196,17 +218,23 @@ LogResult noLog();
     _log0(logCategory, LEVEL_TRACE, __VA_ARGS__)
 #define _logTrace1(logCategory, ...) \
     _log1(logCategory, LEVEL_TRACE, __VA_ARGS__)
+#define _vlogTrace(logCategory, fmt, valist) \
+    _logv(logCategory, LEVEL_TRACE, fmt, valist)
 #else
 #define _logTrace0(logCategory, ...) \
     noLog()
 #define _logTrace1(logCategory, ...) \
     noLog()
+#define _vlogTrace(logCategory, fmt, valist) \
+    nolog()
 #endif
 
 #define _logTest0(logCategory, ...) \
     _log0(logCategory, LEVEL_TEST, __VA_ARGS__)
 #define _logTest1(logCategory, ...) \
     _log1(logCategory, LEVEL_TEST, __VA_ARGS__)
+#define _vlogTest(logCategory, fmt, valist) \
+    _logv(logCategory, LEVEL_TEST, fmt, valist)
 
 /*
  ************************************************************
